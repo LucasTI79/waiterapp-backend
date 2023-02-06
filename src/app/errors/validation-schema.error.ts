@@ -1,0 +1,16 @@
+export type ErrorSchema = {
+  field: (string | number)[];
+  message: string;
+};
+
+export class ValidationSchemaError extends Error {
+  statusCode: number;
+  errors: ErrorSchema[] = [];
+
+  constructor(message: string, errors: ErrorSchema[]) {
+    super(message);
+    this.name = 'VALIDATION_SCHEMA_ERROR';
+    this.statusCode = 422;
+    this.errors = errors;
+  }
+}
